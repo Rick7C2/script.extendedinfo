@@ -124,6 +124,7 @@ class DialogTVShowInfo(DialogVideoInfo):
         options = []
         title = self.info.get_info("tvshowtitle")
         dbid = self.info.get_info("dbid")
+        tvdb_id = self.info.get_info("tvdb_id")
         if dbid:
             call = "RunScript(script.artwork.downloader,mediatype=tv,dbid={}%s)".format(dbid)
             options += [(addon.LANG(413), call % (",mode=gui")),
@@ -132,6 +133,8 @@ class DialogTVShowInfo(DialogVideoInfo):
                         (addon.LANG(32100), call % (",mode=custom"))]
         else:
             options += [(addon.LANG(32166), "RunPlugin(plugin://plugin.video.sickrage?action=addshow&show_name=%s)" % title)]
+            options += [["Meta", "RunPlugin(plugin://plugin.video.meta/tv/tvdb/" + tvdb_id + "/select)||Notification(script.extendedinfo,%s)" % "Meta"]]
+            options += [["MetalliQ", "RunPlugin(plugin://plugin.video.metalliq/tv/tvdb/" + tvdb_id + "/select)||Notification(script.extendedinfo,%s)" % "MetalliQ"]]
         options.append((addon.LANG(1049), "Addon.OpenSettings(script.extendedinfo)"))
         return options
 
