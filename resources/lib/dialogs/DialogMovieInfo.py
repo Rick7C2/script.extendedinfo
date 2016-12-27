@@ -231,6 +231,8 @@ class DialogMovieInfo(DialogVideoInfo):
                         (addon.LANG(32100), call % ",mode=custom")]
         else:
             options += [(addon.LANG(32165), "RunPlugin(plugin://plugin.video.couchpotato_manager/movies/add?imdb_id=%s)" % imdb_id),
+            options += [["Meta", "RunPlugin(plugin://plugin.video.meta/movies/play/imdb/" + imdb_id + "/select)||Notification(script.extendedinfo,%s)" % "Meta"]]
+            options += [["MetalliQ", "RunPlugin(plugin://plugin.video.metalliq/movies/play/imdb/" + imdb_id + "/select)||Notification(script.extendedinfo,%s)" % "MetalliQ"]]            
                         (addon.LANG(32170), "RunPlugin(plugin://plugin.video.trakt_list_manager/watchlist/movies/add?imdb_id=%s)" % imdb_id)]
         options.append((addon.LANG(1049), "Addon.OpenSettings(script.extendedinfo)"))
         return options
